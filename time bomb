@@ -1,0 +1,18 @@
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+
+local reachPower = 100 -- يمكنك التعديل من 0 إلى 500
+
+local function increaseReach(tool)
+    if tool:IsA("Tool") and tool:FindFirstChild("Handle") then
+        local handle = tool.Handle
+        handle.Size = Vector3.new(1, 1, reachPower / 10) -- ضبط مدى الوصول
+        handle.Transparency = 0.5 -- جعل التأثير مرئيًا قليلًا
+    end
+end
+
+char.ChildAdded:Connect(increaseReach)
+
+for _, tool in ipairs(char:GetChildren()) do
+    increaseReach(tool)
+end
